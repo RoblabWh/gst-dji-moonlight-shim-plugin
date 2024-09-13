@@ -1,0 +1,29 @@
+FROM docker.io/library/ubuntu:22.04
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install/Setup Part
+RUN apt-get update && \
+    apt-get upgrade --yes --no-install-recommends && \
+    apt-get install --yes --no-install-recommends ninja-build && \
+    apt-get install --yes git gdb
+
+ARG cmake_version=3.30.3
+RUN apt-get install --yes --no-install-recommends wget ca-certificates && \
+    cd /tmp && \
+    wget https://github.com/Kitware/CMake/releases/download/v${cmake_version}/cmake-${cmake_version}-linux-x86_64.sh -O cmake.sh && \
+    chmod +x cmake.sh && \
+    ./cmake.sh --prefix=/usr/local/ --skip-license && \
+    rm -rf /tmp/*
+
+ARG llvm_version=18
+RUN apt-get install --yes --no-install-recommends lsb-release wget software-properties-common gnupg ca-certificates && \
+    cd /tmp && \
+    wget https://apt.llvm.org/llvm.sh && \
+    chmod +x llvm.sh && \
+    ./llvm.sh ${llvm_version} all && \
+    rm -rf /tmp/*
+ENV CC=clang-${llvm_version}
+ENV CXX=clang++-${llvm_version}
+
+RUN apt-get install --yes libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libusb-1.0-0-dev pkg-config libunwind-dev \
+                          gstreamer1.0-tools gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-plugins-good

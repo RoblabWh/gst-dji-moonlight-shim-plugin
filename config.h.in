@@ -1,0 +1,11 @@
+#ifndef CMAKE_CONFIG_H
+#define CMAKE_CONFIG_H
+
+#cmakedefine GST_API_VERSION "@GST_API_VERSION@"
+#cmakedefine GST_LICENSE "@GST_LICENSE@"
+#cmakedefine GST_PACKAGE_NAME "@GST_PACKAGE_NAME@"
+#cmakedefine GST_PACKAGE_ORIGIN "@GST_PACKAGE_ORIGIN@"
+#cmakedefine PACKAGE "@PROJECT_NAME@"
+#cmakedefine PACKAGE_VERSION "@PROJECT_VERSION@"
+
+#endif
