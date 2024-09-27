@@ -13,7 +13,7 @@ Before building and using the `djimoonlightshim` GStreamer plugin, ensure you ha
 ```bash
 # On Ubuntu/Debian:
 sudo apt install cmake
-sudo apt install libgstreamer1.0-dev
+sudo apt install libgstreamer1.0-dev gstreamer1.0-tools
 sudo apt install libusb-1.0-0-dev
 ```
 
